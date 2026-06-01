@@ -67,3 +67,16 @@ Functional structure unchanged (compliance edits, portal IA all intact). Visual 
 - Card radii softened to 14px, consistent across portal + marketing pages.
 - Reads like a modern health app / Apple Health surface. Mint only signals health status.
 - Fully mobile-optimized (responsive layer from v2 retained + verified at 390px).
+
+---
+
+# Real logo integration (v4)
+
+- Replaced placeholder SVG peak mark with the actual Elevate Health logo (gradient
+  mountain + ELEVATE Health wordmark lockup).
+- Source logo had a solid black background (RGB, no alpha) — knocked out to transparent
+  so it sits cleanly on the light site. Trimmed + exported at retina res (244x144).
+- Logo component now renders the image lockup + the "Hormones · Peptides · Longevity"
+  tagline with a divider. Dropped the duplicate text wordmark (it's in the logo now).
+- elevate_logo.png = color (nav + footer, both light surfaces).
+- elevate_logo_white.png = white knockout, wired via inverse prop for any future dark surface.

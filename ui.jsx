@@ -148,34 +148,24 @@ function Tick() {
 }
 
 function Logo({ inverse }) {
-  // Stylized peak mark + wordmark
-  const wordColor = inverse ? "#FFFFFF" : "var(--ink)";
-  const accent = "var(--mint)";
-  const peakBlue = "var(--blue)";
   return (
-    <a href="Elevate Health.html" style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
-      <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-        <rect x="0.5" y="0.5" width="33" height="33" rx="6" fill={inverse ? "rgba(255,255,255,0.06)" : "var(--blue-tint)"} stroke={inverse ? "rgba(255,255,255,0.18)" : "var(--rule)"} />
-        <path d="M5 25 L12 11 L17 19 L21 13 L29 25 Z" fill="none" stroke={peakBlue} strokeWidth="1.6" strokeLinejoin="round" />
-        <path d="M12 11 L17 19" stroke={accent} strokeWidth="1.6" strokeLinejoin="round" />
-        <circle cx="12" cy="11" r="1.6" fill={accent} />
-      </svg>
-      <div style={{ display: "flex", flexDirection: "column", lineHeight: 1, gap: 3 }}>
-        <span style={{
-          fontFamily: "var(--display)",
-          fontWeight: 600,
-          fontSize: 18,
-          color: wordColor,
-          letterSpacing: "-0.01em",
-        }}>Elevate Health</span>
-        <span style={{
-          fontFamily: "var(--sans)",
-          fontSize: 11,
-          letterSpacing: "0",
-          color: inverse ? "rgba(255,255,255,0.6)" : "var(--ink-soft)",
-          fontWeight: 500,
-        }}>Hormones · Peptides · Longevity</span>
-      </div>
+    <a href="Elevate Health.html" style={{ display: "inline-flex", alignItems: "center", gap: 14 }}>
+      <img
+        src={inverse ? "elevate_logo_white.png" : "elevate_logo.png"}
+        alt="Elevate Health"
+        style={{ height: 38, width: "auto", display: "block" }}
+      />
+      <span style={{
+        fontFamily: "var(--sans)",
+        fontSize: 11,
+        letterSpacing: "0",
+        color: inverse ? "rgba(255,255,255,0.6)" : "var(--ink-soft)",
+        fontWeight: 500,
+        paddingLeft: 14,
+        borderLeft: inverse ? "1px solid rgba(255,255,255,0.18)" : "1px solid var(--rule)",
+        lineHeight: 1.3,
+        maxWidth: 130,
+      }}>Hormones · Peptides · Longevity</span>
     </a>
   );
 }
