@@ -385,7 +385,7 @@ function Footer() {
             <a href="#">Accessibility</a>
             <a href="#">Sitemap</a>
           </div>
-          <div>Brevard County · Florida</div>
+          <div>Telehealth · Florida</div>
         </div>
       </div>
     </footer>

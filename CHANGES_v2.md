@@ -80,3 +80,17 @@ Functional structure unchanged (compliance edits, portal IA all intact). Visual 
   tagline with a divider. Dropped the duplicate text wordmark (it's in the logo now).
 - elevate_logo.png = color (nav + footer, both light surfaces).
 - elevate_logo_white.png = white knockout, wired via inverse prop for any future dark surface.
+
+---
+
+# Telehealth-only correction (v5)
+
+Client has NO physical location and won't for some time (if ever). Removed all
+in-person / physical-location framing:
+- Contact page: dropped "In-clinic / Brevard County, FL" row. Now: Booking (online only),
+  Care model (100% telehealth), Availability (same-week, statewide Florida).
+- Home hero eyebrow: "Est. — Brevard County, FL" → "Telehealth · Florida".
+- Footer: "Brevard County · Florida" → "Telehealth · Florida".
+- Portal mock appointment: "In-clinic" lab review → "Telehealth".
+- Kept "self-pay clinic" / "our clinic" language (standard for telehealth practices,
+  doesn't imply a building). Florida retained as licensure/service area.

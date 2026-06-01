@@ -19,7 +19,7 @@ function Hero() {
           paddingBottom: 28,
         }}>
           <span className="eyebrow" style={{ color: "var(--blue)" }}>Hormone &amp; longevity medicine</span>
-          <span className="eyebrow" style={{ color: "var(--ink-mute)" }}>Est. — Brevard County, FL</span>
+          <span className="eyebrow" style={{ color: "var(--ink-mute)" }}>Telehealth · Florida</span>
         </Reveal>
 
         <div data-collapse="true" style={{

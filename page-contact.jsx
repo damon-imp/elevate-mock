@@ -35,8 +35,8 @@ function ContactPage() {
                 <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
                   {[
                     { label: "Booking", value: "Online only", sub: "So we can match you with the right provider", link: null },
-                    { label: "In-clinic", value: "Brevard County, FL", sub: "Address on confirmation", link: null },
-                    { label: "Telehealth", value: "Available statewide", sub: "Same-week appointments", link: null },
+                    { label: "Care model", value: "100% telehealth", sub: "See your provider from anywhere in Florida", link: null },
+                    { label: "Availability", value: "Same-week appointments", sub: "Statewide across Florida", link: null },
                   ].map((row, i) => (
                     <div key={i} style={{
                       paddingBottom: 24,

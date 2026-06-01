@@ -19,7 +19,7 @@ const PORTAL_LABS = [
 
 const PORTAL_APPTS = [
   { date: "Jun 12", time: "10:00 AM", with: "Dr. Lena Reyes", type: "90-day follow-up", method: "Telehealth", confirmed: true },
-  { date: "Aug 04", time: "11:30 AM", with: "Dr. Lena Reyes", type: "Lab review", method: "In-clinic", confirmed: false },
+  { date: "Aug 04", time: "11:30 AM", with: "Dr. Lena Reyes", type: "Lab review", method: "Telehealth", confirmed: false },
 ];
 
 const PORTAL_MEDS = [
