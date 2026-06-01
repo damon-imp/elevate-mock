@@ -1,0 +1,205 @@
+/* base.css — shared styles across all Elevate pages */
+
+:root {
+  /* Palette — Apple-calm: true neutrals, restrained blue, mint kept functional only */
+  --bg: #FFFFFF;
+  --bg-2: #F5F5F7;        /* Apple systemGray6 */
+  --bg-3: #ECECEF;
+  --ink: #1D1D1F;         /* Apple near-black, not navy */
+  --ink-soft: #6E6E73;    /* Apple secondary label */
+  --ink-mute: #A1A1A6;    /* Apple tertiary label */
+  --blue: #0A6CFF;        /* single accent, slightly softer */
+  --blue-2: #0858D6;
+  --blue-3: #4E97FF;
+  --blue-tint: #E8F0FF;
+  --mint: #1FB87E;        /* functional success cue only */
+  --mint-2: #138A5E;
+  --mint-tint: #E2F5EC;
+  --rule: rgba(0, 0, 0, 0.09);
+  --rule-soft: rgba(0, 0, 0, 0.05);
+
+  /* Single soft shadow tier — Apple uses one, subtle */
+  --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+
+  /* Consistent radii */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-pill: 980px;
+
+  /* Typography — system (SF on Apple devices), one family */
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  --display-weight: 600;
+  --display-tracking: -0.022em;
+
+  /* Scale */
+  --h1: clamp(40px, 5vw, 64px);
+  --h2: clamp(30px, 3.4vw, 44px);
+  --h3: clamp(22px, 2.2vw, 30px);
+}
+
+/* Font toggles retained as near-identical so existing toggle code is harmless */
+body[data-display="slab"],
+body[data-display="grotesk"] {
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --display-weight: 600;
+  --display-tracking: -0.022em;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body { overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img { display: block; max-width: 100%; }
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.05;
+}
+p { margin: 0; }
+::selection { background: var(--blue); color: #FFFFFF; }
+
+/* Wrapper */
+.wrap { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+.wrap-tight { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+
+/* Eyebrow */
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--blue);
+}
+
+/* Rule */
+.rule { height: 1px; background: var(--rule); width: 100%; }
+
+/* Fade-up reveal */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms cubic-bezier(0.2, 0.7, 0, 1),
+              transform 800ms cubic-bezier(0.2, 0.7, 0, 1);
+}
+.fade-up.in { opacity: 1; transform: translateY(0); }
+
+/* Image with subtle gradient overlay */
+.img-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Body modes */
+body[data-mode="dark"] {
+  --bg: #04102B;
+  --bg-2: #0A1A3B;
+  --bg-3: #102448;
+  --ink: #F0F4FF;
+  --ink-soft: #B6BFD6;
+  --ink-mute: #6C7898;
+  --blue: #5E92FF;
+  --blue-2: #82A8FF;
+  --blue-tint: rgba(94, 146, 255, 0.15);
+  --mint: #3FDCAA;
+  --mint-tint: rgba(63, 220, 170, 0.15);
+  --rule: rgba(240, 244, 255, 0.14);
+  --rule-soft: rgba(240, 244, 255, 0.07);
+}
+
+/* ============================================================
+   MOBILE OPTIMIZATION LAYER
+   Collapses fixed multi-column grids to single column on small
+   viewports. Targets structural grids via attribute selector so
+   inline-styled React grids reflow without per-component rewrites.
+   ============================================================ */
+
+/* Nav: show burger, hide desktop nav + CTA under 920px */
+.nav-burger { }
+@media (max-width: 920px) {
+  .nav-desktop { display: none !important; }
+  .nav-cta-desktop { display: none !important; }
+  .nav-burger { display: flex !important; }
+  .nav-wrap { grid-template-columns: auto auto !important; justify-content: space-between; padding: 14px 20px !important; }
+}
+
+/* Wrappers: tighten gutters on mobile */
+@media (max-width: 720px) {
+  .wrap, .wrap-tight { padding: 0 20px !important; }
+}
+
+/* Generic: any 2+ column inline grid collapses to 1 column.
+   We scope to common patterns used across the build. */
+@media (max-width: 860px) {
+  /* Hero, manifesto, CTA band, contact, portal dashboard:
+     these use grid-template-columns with fr units inline.
+     The data-collapse hook (added on key sections) forces single col. */
+  [data-collapse="true"] { grid-template-columns: 1fr !important; }
+
+  /* Portal education + pharmacy + lab grids → 1 col */
+  .edu-grid { grid-template-columns: 1fr !important; }
+  .pharm-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Portal tab strip: horizontal scroll instead of wrap/squish */
+@media (max-width: 720px) {
+  .portal-tabs { overflow-x: auto !important; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch; }
+  .portal-tabs button { white-space: nowrap; flex-shrink: 0; }
+}
+
+/* Lab cards 3-up → 1-up on phones, 2-up on small tablets */
+@media (max-width: 860px) {
+  .lab-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 560px) {
+  .lab-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Reduce oversized vertical padding on mobile sections */
+@media (max-width: 720px) {
+  section { padding-left: 0; padding-right: 0; }
+}
+
+/* Tweaks panel: keep it from covering content on mobile */
+@media (max-width: 560px) {
+  .tweaks-panel, [class*="tweaks"] { transform: scale(0.92); transform-origin: bottom right; }
+}
+
+/* Portal tab strip horizontal scroll fix (parent must not clip) */
+@media (max-width: 720px) {
+  .portal-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; margin-left: -20px; margin-right: -20px; padding-left: 20px; padding-right: 20px; }
+  .portal-tabs::-webkit-scrollbar { display: none; }
+}
+
+/* Announcement bar: smaller + wrap on mobile */
+@media (max-width: 560px) {
+  body [style*="ACCEPTING"], .announce { font-size: 10px !important; }
+}
+
+/* Dashboard appointment card: stack inner grid on mobile */
+@media (max-width: 560px) {
+  .appt-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+}
