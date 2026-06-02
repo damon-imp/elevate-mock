@@ -33,7 +33,14 @@ function PortalPage() {
   const [t, setTweak] = useStoredTweaks(window.TWEAK_DEFAULTS_PORTAL);
   React.useEffect(() => { applyTheme(t); }, [t]);
 
+  const [portal, setPortal] = React.useState("patient"); // patient | provider | admin
   const [tab, setTab] = React.useState("dashboard");
+
+  const PORTALS = [
+    { id: "patient",  label: "Patient" },
+    { id: "provider", label: "Provider" },
+    { id: "admin",    label: "Clinic Admin" },
+  ];
 
   return (
     <React.Fragment>
@@ -45,6 +52,30 @@ function PortalPage() {
         minHeight: "calc(100vh - 200px)",
       }}>
         <div className="wrap" style={{ paddingTop: 40, paddingBottom: 80 }}>
+
+          {/* Portal switcher — three-portal clinical OS */}
+          <div className="portal-switch" style={{
+            display: "inline-flex", gap: 4, padding: 4, background: "var(--bg-3)",
+            borderRadius: 980, marginBottom: 28,
+          }}>
+            {PORTALS.map(p => {
+              const on = portal === p.id;
+              return (
+                <button key={p.id} onClick={() => setPortal(p.id)} style={{
+                  appearance: "none", border: "none", cursor: "pointer",
+                  padding: "9px 20px", borderRadius: 980, fontFamily: "var(--sans)",
+                  fontSize: 13.5, fontWeight: on ? 600 : 500,
+                  background: on ? "var(--bg)" : "transparent",
+                  color: on ? "var(--ink)" : "var(--ink-soft)",
+                  boxShadow: on ? "var(--shadow-sm)" : "none",
+                  transition: "all 160ms ease",
+                }}>{p.label}</button>
+              );
+            })}
+          </div>
+
+          {portal === "patient" && (
+          <React.Fragment>
           {/* Header strip */}
           <PortalHeader />
 
@@ -59,7 +90,9 @@ function PortalPage() {
             {[
               { id: "dashboard", label: "Dashboard" },
               { id: "labs",      label: "Labs & trends" },
+              { id: "trends",    label: "Lab intelligence" },
               { id: "protocol",  label: "Protocol" },
+              { id: "plan",      label: "Plan of Care" },
               { id: "education", label: "Education" },
               { id: "pharmacy",  label: "Pharmacy" },
               { id: "messages",  label: "Messages" },
@@ -83,6 +116,7 @@ function PortalPage() {
                     transition: "color 180ms ease",
                     marginBottom: -1,
                     fontFamily: "var(--sans)",
+                    whiteSpace: "nowrap",
                   }}
                   onMouseEnter={(e) => { if (!on) e.currentTarget.style.color = "var(--ink)"; }}
                   onMouseLeave={(e) => { if (!on) e.currentTarget.style.color = "var(--ink-soft)"; }}
@@ -95,11 +129,19 @@ function PortalPage() {
 
           {tab === "dashboard" && <DashboardView />}
           {tab === "labs"      && <LabsView />}
+          {tab === "trends"    && <PatientLabIntelligence />}
           {tab === "protocol"  && <ProtocolView />}
+          {tab === "plan"      && <PatientPlanView />}
           {tab === "education" && <EducationView />}
           {tab === "pharmacy"  && <PharmacyView />}
           {tab === "messages"  && <MessagesView />}
           {tab === "billing"   && <BillingView />}
+          </React.Fragment>
+          )}
+
+          {portal === "provider" && <MLQProviderView />}
+          {portal === "admin"    && <MLQAdminView />}
+
         </div>
       </div>
 
@@ -572,6 +614,53 @@ function PharmacyView() {
         <div style={{ marginTop: 18, fontSize: 12.5, color: "var(--ink-mute)", lineHeight: 1.55 }}>
           Requests go to your care team as a message. A provider reviews every request before anything is prescribed or ordered.
         </div>
+      </Card>
+    </div>
+  );
+}
+
+function PatientLabIntelligence() {
+  const data = MLQ_DEMO;
+  const [exp, setExp] = React.useState(new Set(["Total Testosterone", "Hematocrit"]));
+  const toggle = m => { const n = new Set(exp); n.has(m) ? n.delete(m) : n.add(m); setExp(n); };
+  const cats = {};
+  for (const [m, v] of Object.entries(data.values)) {
+    const d = MLQ_MD[m]; if (!d) continue;
+    if (v.some(x => x != null)) (cats[d.c] = cats[d.c] || []).push(m);
+  }
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Card title="Your labs over time">
+        <p style={{ fontSize: 14, color: "var(--ink-soft)", lineHeight: 1.6, maxWidth: 620 }}>
+          Every lab you've ever had, tracked together so you can see the trend - not just one number at a time. Green band is your healthy range. Tap any marker to see its chart.
+        </p>
+      </Card>
+      {Object.entries(cats).map(([cat, ms]) => (
+        <Card key={cat} title={cat}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {ms.map(m => <MLQMarkerCard key={m} marker={m} values={data.values[m]} draws={data.draws} open={exp.has(m)} onToggle={() => toggle(m)} />)}
+          </div>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+function PatientPlanView() {
+  const data = MLQ_DEMO;
+  const flags = [...MLQ_runLR(data), ...MLQ_runQR(data.questionnaire, data.values)];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Card title="Your plan of care">
+        <p style={{ fontSize: 14, color: "var(--ink-soft)", lineHeight: 1.6, maxWidth: 620, marginBottom: 4 }}>
+          Your provider's plan, written so it actually makes sense. What we found, what it means, and what we're doing about it.
+        </p>
+      </Card>
+      <Card title="What your provider recommends">
+        <MLQFlags flags={flags} />
+      </Card>
+      <Card title="Your current protocol">
+        <MLQTreatmentPlan />
       </Card>
     </div>
   );

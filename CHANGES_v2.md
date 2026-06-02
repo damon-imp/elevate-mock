@@ -94,3 +94,43 @@ in-person / physical-location framing:
 - Portal mock appointment: "In-clinic" lab review → "Telehealth".
 - Kept "self-pay clinic" / "our clinic" language (standard for telehealth practices,
   doesn't imply a building). Florida retained as licensure/service area.
+
+---
+
+# MedLabIQ clinical OS ported into the mock (v6)
+
+ADDITIVE — nothing removed from the existing client portal. Layered the full
+MedLabIQ three-portal clinical operating system into Emily's light theme.
+
+## New: three-portal switcher (Patient / Provider / Clinic Admin)
+Top-of-portal pill toggle. Patient view keeps ALL existing tabs (Dashboard, Labs,
+Protocol, Education, Pharmacy, Messages, Payment) and ADDS two MedLabIQ tabs:
+"Lab intelligence" (longitudinal trending) and "Plan of Care" (patient-facing).
+
+## New: Provider view (the one-patient-view clinical OS)
+- One patient view: chart header with Message / Order meds / Send notes all actionable
+  from the record, patient state (FL) shown inline -> answers Emily's #1 complaint
+  (context-switching) and the compound-pharmacy state lookup.
+- Flag counts on the view (critical / watch / draws / last contact).
+- Sub-tabs: Overview (live flags), Labs & charting (longitudinal trend charts, grouped
+  by panel), Plan of Care (SOAP + auto-generated recommendations + export signed PDF),
+  Medications (treatment plan, order from chart).
+
+## New: Clinic Admin view
+Roster of all patients, KPI tiles (total / active / critical flags / labs overdue),
+search + status filter incl. Archived (Emily's "archive don't delete" ask), per-patient
+provider / program / flags / status.
+
+## Ported from MedLabIQ (namespaced MLQ_, light-themed)
+- Marker definitions (MD), clinical rules engine (RULES + QS_RULES), demo lab dataset
+  (6 draws), clinic roster (12 patients). Real logic: runLR/runQR fire live flags.
+- Longitudinal trend chart rebuilt in light theme (green reference band, color-coded points).
+- SOAP / Plan of Care = Emily's net-new "AI notetaker, SOAP, Plan of Care not from the 90s."
+
+## Files changed
+- NEW  mlq.jsx (data + rules + clinical components + provider/admin views)
+- EDIT page-portal.jsx (3-portal switcher; patient gets 2 new MLQ tabs)
+- EDIT base.css (portal switcher + roster mobile rules)
+- EDIT Client Portal.html (loads mlq.jsx before page-portal.jsx)
+
+All three portals verified mobile-optimized at 390px. Dark MedLabIQ -> light Elevate theme.

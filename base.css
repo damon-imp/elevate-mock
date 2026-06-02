@@ -203,3 +203,18 @@ body[data-mode="dark"] {
 @media (max-width: 560px) {
   .appt-row { grid-template-columns: 1fr !important; gap: 12px !important; }
 }
+
+/* ===== MedLabIQ portal additions — mobile ===== */
+@media (max-width: 720px) {
+  .portal-switch { width: 100%; justify-content: stretch; }
+  .portal-switch button { flex: 1; padding-left: 0 !important; padding-right: 0 !important; }
+}
+/* Admin roster: collapse 5-col rows to stacked cards on mobile */
+@media (max-width: 720px) {
+  .mlq-roster-head { display: none !important; }
+}
+@media (max-width: 560px) {
+  /* provider/admin stat grids already use .lab-grid -> handled. */
+  /* admin roster rows: stack */
+  .mlq-roster-row { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
+}
