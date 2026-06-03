@@ -177,6 +177,9 @@ function MLQPlanOfCare({ patient, flags }) {
           <button style={MLQ_primBtn}>Export signed PDF</button>
         </div>
       </div>
+      <div style={{ fontSize: 12.5, color: "var(--ink-soft)", background: "var(--bg-2)", padding: "10px 14px", borderRadius: 10, lineHeight: 1.5 }}>
+        Auto-drafted from the patient's pre-review intake (submitted Jun 10) + the labs below. Provider edits and signs. Patient-facing version generated in plain language.
+      </div>
       {[
         { k: "S", label: "Subjective", body: "Patient reports persistent low energy and difficulty with recovery despite current protocol adherence. Sleep quality variable." },
         { k: "O", label: "Objective", body: crit.length ? `${crit.length} critical flag(s), ${warn.length} to watch. Key findings below.` : "Markers largely within range; trends reviewed across draws." },
@@ -318,6 +321,13 @@ function MLQProviderView() {
             <button style={MLQ_primBtn}>Order from chart</button>
           </div>
           <MLQTreatmentPlan />
+          <div style={{ marginTop: 18, padding: 16, background: "var(--blue-tint)", borderRadius: 12, border: "1px solid rgba(31,102,255,0.18)" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--blue)", marginBottom: 8 }}>Patient-reported dose changes</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              <div style={{ fontSize: 13.5, color: "var(--ink)" }}><span style={{ fontWeight: 600 }}>Estradiol cream</span> - patient reported <span style={{ fontFamily: "var(--mono)" }}>0.5 mL twice daily</span> on Jun 3 (was 0.25 mL). Self-adjusted for symptom relief.</div>
+              <div style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Titrating meds update here the moment the patient reports them - no waiting for a callback. Captured into the chart and the next review.</div>
+            </div>
+          </div>
         </div>
       )}
     </div>

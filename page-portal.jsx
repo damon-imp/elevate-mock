@@ -89,6 +89,7 @@ function PortalPage() {
           }}>
             {[
               { id: "dashboard", label: "Dashboard" },
+              { id: "appointments", label: "Appointments" },
               { id: "labs",      label: "Labs & trends" },
               { id: "trends",    label: "Lab intelligence" },
               { id: "protocol",  label: "Protocol" },
@@ -128,6 +129,7 @@ function PortalPage() {
           </div>
 
           {tab === "dashboard" && <DashboardView />}
+          {tab === "appointments" && <AppointmentsView />}
           {tab === "labs"      && <LabsView />}
           {tab === "trends"    && <PatientLabIntelligence />}
           {tab === "protocol"  && <ProtocolView />}
@@ -191,6 +193,19 @@ function PortalHeader() {
 
 function DashboardView() {
   return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {/* Intake due before lab review — feeds the provider's AI summary */}
+      <div className="appt-row" style={{
+        display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 18, alignItems: "center",
+        padding: "16px 20px", background: "#FCF3E6", border: "1px solid #B7791F33", borderRadius: 14,
+      }}>
+        <div style={{ width: 40, height: 40, borderRadius: 10, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📝</div>
+        <div>
+          <div style={{ fontWeight: 600, fontSize: 14.5, color: "var(--ink)" }}>Your intake is due before your lab review</div>
+          <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>Takes 3 minutes. Tell us how you're feeling so your provider has the full picture on Jun 12.</div>
+        </div>
+        <button style={primaryBtn}>Start intake</button>
+      </div>
     <div data-collapse="true" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 24 }}>
       {/* Left column */}
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -307,7 +322,28 @@ function DashboardView() {
           </div>
         </Card>
 
-        {/* Messages preview */}
+        {/* Weight tracker — GLP-1 oriented */}
+        <Card title="Weight trend" action="Log weight →">
+          <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 4 }}>
+            <div style={{ fontSize: 30, fontWeight: 700, fontFamily: "var(--mono)", color: "var(--ink)" }}>196<span style={{ fontSize: 14, color: "var(--ink-mute)" }}> lb</span></div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "var(--mint-2)" }}>↓ 22 lb since start</div>
+          </div>
+          <svg viewBox="0 0 320 90" style={{ width: "100%", height: "auto", display: "block", marginTop: 8 }}>
+            {(() => {
+              const w = [218, 213, 208, 205, 201, 198, 196];
+              const lo = 190, hi = 222;
+              const x = i => 8 + (i / (w.length - 1)) * 304;
+              const y = v => 8 + (1 - (v - lo) / (hi - lo)) * 74;
+              const line = w.map((v, i) => `${i === 0 ? "M" : "L"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+              return <g>
+                <path d={line} fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                {w.map((v, i) => <circle key={i} cx={x(i)} cy={y(v)} r="3" fill="var(--mint-2)" stroke="#fff" strokeWidth="1.5" />)}
+              </g>;
+            })()}
+          </svg>
+          <div style={{ fontSize: 12, color: "var(--ink-mute)", marginTop: 6 }}>On GLP-1 since March · weekly check-ins</div>
+        </Card>
+
         <Card title="Messages" action="3 unread →">
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {[
@@ -376,6 +412,67 @@ function DashboardView() {
         </Card>
       </div>
     </div>
+    </div>
+  );
+}
+
+function AppointmentsView() {
+  const upcoming = [
+    { date: "Jun 12", time: "10:00 AM", type: "90-day lab review", who: "Dr. Lena Reyes", method: "Telehealth", flag: "Intake due" },
+    { date: "Sep 14", time: "11:30 AM", type: "Quarterly check-in", who: "Dr. Lena Reyes", method: "Telehealth", flag: null },
+  ];
+  const past = [
+    { date: "Mar 15", time: "9:00 AM", type: "Lab review", who: "Dr. Lena Reyes", method: "Telehealth" },
+    { date: "Dec 02", time: "2:00 PM", type: "Initial consult", who: "Marcus Heller, NP", method: "Telehealth" },
+    { date: "Nov 18", time: "10:30 AM", type: "Onboarding", who: "Patient Coordinator", method: "Phone" },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {/* Cross-channel booking visibility — the dedup pain */}
+      <div className="appt-row" style={{
+        display: "grid", gridTemplateColumns: "auto 1fr", gap: 16, alignItems: "center",
+        padding: "14px 18px", background: "var(--blue-tint)", border: "1px solid rgba(31,102,255,0.2)", borderRadius: 12,
+      }}>
+        <div style={{ width: 36, height: 36, borderRadius: 9, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>✓</div>
+        <div style={{ fontSize: 13.5, color: "var(--ink)", lineHeight: 1.5 }}>
+          <span style={{ fontWeight: 600 }}>Already booked.</span> This patient reached out by email and portal message - both point to the Jun 12 review below. No double-booking needed.
+        </div>
+      </div>
+
+      <Card title="Upcoming">
+        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          {upcoming.map((a, i) => (
+            <div key={i} className="appt-row" style={{ display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 18, alignItems: "center", padding: "16px 0", borderTop: i === 0 ? "none" : "1px solid var(--rule)" }}>
+              <div style={{ minWidth: 64, textAlign: "center", padding: "8px 12px", background: "var(--blue-tint)", borderRadius: 10 }}>
+                <div style={{ fontSize: 11, color: "var(--blue)", fontWeight: 600, letterSpacing: "0.06em" }}>{a.date.split(" ")[0].toUpperCase()}</div>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "var(--blue)" }}>{a.date.split(" ")[1]}</div>
+              </div>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 15 }}>{a.type}
+                  {a.flag && <span style={{ marginLeft: 8, fontSize: 11, fontWeight: 600, color: "#8A5A00", background: "#FCF3E6", padding: "2px 8px", borderRadius: 6 }}>{a.flag}</span>}
+                </div>
+                <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>{a.time} · {a.who} · {a.method}</div>
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button style={subtleBtn}>Reschedule</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <Card title="History">
+        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          {past.map((a, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "90px 1fr auto", gap: 16, alignItems: "center", padding: "13px 0", borderTop: i === 0 ? "none" : "1px solid var(--rule)", fontSize: 13.5 }}>
+              <div style={{ fontFamily: "var(--mono)", fontSize: 12.5, color: "var(--ink-soft)" }}>{a.date}</div>
+              <div><span style={{ fontWeight: 500 }}>{a.type}</span> · <span style={{ color: "var(--ink-soft)" }}>{a.who}</span></div>
+              <div style={{ fontSize: 12, color: "var(--ink-mute)" }}>{a.method}</div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 }
 
@@ -392,30 +489,65 @@ function LabsView() {
 }
 
 function ProtocolView() {
+  const [reporting, setReporting] = React.useState(null);
+  // titration meds (creams) carry a patient-reported current dose; fixed meds don't
+  const titratable = { "Estradiol": true, "Progesterone (oral)": false, "Sermorelin": false, "Vitamin D3 + K2": false };
   return (
-    <Card title="Comprehensive Hormone Optimization Protocol">
-      <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-        {PORTAL_MEDS.map((m, i) => (
-          <div key={m.name} style={{
-            display: "grid",
-            gridTemplateColumns: "1.5fr 1fr 1fr 1fr auto",
-            gap: 24,
-            padding: "20px 0",
-            borderTop: i === 0 ? "none" : "1px solid var(--rule)",
-            alignItems: "center",
-          }}>
-            <div>
-              <div style={{ fontWeight: 500, fontSize: 16 }}>{m.name}</div>
-              <div style={{ fontSize: 13, color: "var(--ink-soft)", marginTop: 2 }}>{m.dose}</div>
-            </div>
-            <div style={{ fontSize: 13.5, color: "var(--ink-soft)" }}>{m.schedule}</div>
-            <div style={{ fontSize: 13.5, color: "var(--mint-2)" }}>{m.refills} refills</div>
-            <div style={{ fontSize: 13.5, color: "var(--ink-soft)" }}>{m.next}</div>
-            <button style={primaryBtn}>Refill</button>
-          </div>
-        ))}
-      </div>
-    </Card>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Card title="Comprehensive Hormone Optimization Protocol">
+        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          {PORTAL_MEDS.map((m, i) => {
+            const tit = titratable[m.name];
+            return (
+              <div key={m.name} style={{
+                padding: "20px 0",
+                borderTop: i === 0 ? "none" : "1px solid var(--rule)",
+              }}>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "1.5fr 1fr 1fr auto",
+                  gap: 24,
+                  alignItems: "center",
+                }}>
+                  <div>
+                    <div style={{ fontWeight: 500, fontSize: 16 }}>{m.name}
+                      {tit && <span style={{ marginLeft: 8, fontSize: 11, fontWeight: 600, color: "var(--blue)", background: "var(--blue-tint)", padding: "2px 8px", borderRadius: 6, verticalAlign: "middle" }}>TITRATING</span>}
+                    </div>
+                    <div style={{ fontSize: 13, color: "var(--ink-soft)", marginTop: 2 }}>
+                      {tit ? "Current dose, as you last reported it:" : m.dose}
+                      {tit && <span style={{ color: "var(--ink)", fontWeight: 500 }}> {m.dose}</span>}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: 13.5, color: "var(--ink-soft)" }}>{m.schedule}</div>
+                  <div style={{ fontSize: 13.5, color: tit ? "var(--ink-soft)" : "var(--mint-2)" }}>
+                    {tit ? "Adjust as needed" : `${m.refills} refills · ${m.next}`}
+                  </div>
+                  {tit
+                    ? <button style={subtleBtn} onClick={() => setReporting(reporting === m.name ? null : m.name)}>Report dose change</button>
+                    : <button style={primaryBtn}>Refill</button>}
+                </div>
+                {tit && reporting === m.name && (
+                  <div style={{ marginTop: 16, padding: 16, background: "var(--bg-2)", borderRadius: 12 }}>
+                    <div style={{ fontSize: 13, color: "var(--ink-soft)", marginBottom: 10, lineHeight: 1.5 }}>
+                      Adjusting your cream based on how you feel? Tell us your new amount so your provider has it at your next review - no phone call needed.
+                    </div>
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                      <input placeholder="e.g. 0.5 mL twice daily" style={{ flex: 1, minWidth: 180, padding: "9px 14px", borderRadius: 980, border: "1px solid var(--rule)", fontFamily: "var(--sans)", fontSize: 13.5, background: "var(--bg)", color: "var(--ink)" }} />
+                      <button style={primaryBtn} onClick={() => setReporting(null)}>Send to provider</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </Card>
+      <Card title="Why this looks different">
+        <p style={{ fontSize: 13.5, color: "var(--ink-soft)", lineHeight: 1.6, maxWidth: 640 }}>
+          Hormone creams get adjusted often based on how you respond. Instead of a fixed refill countdown that assumes a set dose, titrating medications let you report your current amount the moment you change it - so your provider always knows what you're actually taking, captured the second you decide, not weeks later on a call.
+        </p>
+      </Card>
+    </div>
   );
 }
 

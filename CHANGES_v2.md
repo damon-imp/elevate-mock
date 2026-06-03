@@ -134,3 +134,28 @@ provider / program / flags / status.
 - EDIT Client Portal.html (loads mlq.jsx before page-portal.jsx)
 
 All three portals verified mobile-optimized at 390px. Dark MedLabIQ -> light Elevate theme.
+
+---
+
+# Emily round-2 feedback applied (v7)
+
+ADDITIVE. Four items from her 6/2 review:
+
+1. TITRATION DOSING (correction, not add). Fixed refill-countdown doesn't model women's
+   creams (testosterone/estradiol) adjusted constantly on side effects. Real problem: clinic
+   doesn't know current dose unless patient calls back. Build: titrating meds tagged TITRATING,
+   patient reports dose change the moment they make it -> captured to chart + next review, no
+   callback. Fixed meds keep normal refill flow. Provider meds tab shows patient-reported
+   dose-change log. Data-model impact - flagged for Greg.
+2. WEIGHT TRACKER (add). Trend card on patient dashboard, GLP-1 oriented.
+3. APPOINTMENTS history + future (add + dedup). New Appointments tab: upcoming + history, plus
+   the cross-channel "already booked" banner - patient hit email + portal, both resolve to one
+   appt, no double-booking. Staff coordination need she described.
+4. INTAKE DUE BEFORE LAB REVIEW (keystone). Amber banner on dashboard: intake due before the
+   review. This is the AI's INPUT pipeline - labs + intake land together so the provider walks in
+   with the full picture. Provider Plan of Care notes it's auto-drafted from intake + labs.
+   Ties to trigger system (flag intake due -> nudge patient).
+
+Files changed: page-portal.jsx (protocol/titration, dashboard intake banner + weight, new
+AppointmentsView), mlq.jsx (provider dose-change log, plan-of-care intake source note).
+All verified mobile-optimized at 390px.
