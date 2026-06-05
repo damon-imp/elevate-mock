@@ -173,12 +173,13 @@ function MLQPlanOfCare({ patient, flags }) {
           <div style={{ fontSize: 20, fontWeight: 600, color: "var(--ink)" }}>{patient.name}</div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
+          <button style={MLQ_ghostBtn}>Generate from visit</button>
           <button style={MLQ_ghostBtn}>Edit</button>
           <button style={MLQ_primBtn}>Export signed PDF</button>
         </div>
       </div>
       <div style={{ fontSize: 12.5, color: "var(--ink-soft)", background: "var(--bg-2)", padding: "10px 14px", borderRadius: 10, lineHeight: 1.5 }}>
-        Auto-drafted from the patient's pre-review intake (submitted Jun 10) + the labs below. Provider edits and signs. Patient-facing version generated in plain language.
+        Auto-drafted from the visit transcript (AI notetaker) + the patient's pre-review intake (submitted Jun 10) + the labs below. SOAP generated, provider edits and signs - never auto-committed. Patient-facing version generated in plain language. Writes straight into the chart, no copy-paste between programs.
       </div>
       {[
         { k: "S", label: "Subjective", body: "Patient reports persistent low energy and difficulty with recovery despite current protocol adherence. Sleep quality variable." },
@@ -249,6 +250,7 @@ function MLQProviderView() {
     { id: "charting", label: "Labs & charting" },
     { id: "plan", label: "Plan of Care" },
     { id: "meds", label: "Medications" },
+    { id: "refills", label: "Refills" },
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
@@ -328,6 +330,31 @@ function MLQProviderView() {
               <div style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Titrating meds update here the moment the patient reports them - no waiting for a callback. Captured into the chart and the next review.</div>
             </div>
           </div>
+        </div>
+      )}
+      {sub === "refills" && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600 }}>Refill queue</div>
+              <div style={{ fontSize: 12.5, color: "var(--ink-soft)", marginTop: 2 }}>One queue, one owner. Requests route here - not blasted to all four providers.</div>
+            </div>
+            <button style={MLQ_primBtn}>Approve selected</button>
+          </div>
+          {[
+            { med: "Testosterone cypionate 200mg/mL", req: "Jun 4", status: "Due", owner: "Refill desk", note: "On protocol cadence, labs current" },
+            { med: "NP Thyroid 120mg", req: "Jun 4", status: "Due", owner: "Refill desk", note: "Stable, no changes" },
+            { med: "Semaglutide", req: "Jun 3", status: "Needs review", owner: "Provider", note: "Titration week - confirm dose" },
+          ].map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 14, alignItems: "center", padding: "14px 16px", background: "var(--bg-2)", border: "1px solid var(--rule)", borderRadius: 12 }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600 }}>{r.med}</div>
+                <div style={{ fontSize: 12, color: "var(--ink-soft)", marginTop: 2 }}>Requested {r.req} · {r.note}</div>
+              </div>
+              <span style={{ fontSize: 11.5, fontFamily: "var(--mono)", padding: "3px 9px", borderRadius: 99, background: r.status === "Due" ? "var(--mint-tint)" : "#FCF3E6", color: r.status === "Due" ? "var(--mint-2)" : "#8A5A00" }}>{r.status}</span>
+              <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>{r.owner}</span>
+            </div>
+          ))}
         </div>
       )}
     </div>

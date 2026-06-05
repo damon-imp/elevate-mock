@@ -381,6 +381,7 @@ function DashboardView() {
             {[
               { label: "Order labs", icon: "🧪" },
               { label: "Refill Rx", icon: "💊" },
+              { label: "Report dose change", icon: "⚖️" },
               { label: "Update protocol", icon: "📋" },
               { label: "Book visit", icon: "📅" },
             ].map((a) => (
@@ -596,12 +597,29 @@ function BillingView() {
 
 function EducationView() {
   const GUIDES = [
-    { cat: "Getting started", title: "What to expect in your first 30 days", type: "Guide", min: "5 min read" },
-    { cat: "Estrogen", title: "Estradiol patch — how to apply and rotate sites", type: "Video", min: "3 min" },
-    { cat: "Progesterone", title: "Oral progesterone — timing, sleep, and what's normal", type: "Guide", min: "4 min read" },
-    { cat: "Testosterone", title: "Subcutaneous injection — full how-to walkthrough", type: "Video", min: "6 min" },
-    { cat: "Peptides", title: "Reconstituting and dosing your peptides safely", type: "Video", min: "7 min" },
-    { cat: "Weight loss", title: "GLP-1 titration — managing the first weeks", type: "Guide", min: "5 min read" },
+    // Module 1 — Set Expectations
+    { cat: "Getting started", title: "This takes time — here's the real timeline", type: "Video", min: "4 min" },
+    { cat: "Getting started", title: "The order things improve (sleep → energy → everything)", type: "Guide", min: "4 min read" },
+    { cat: "Getting started", title: "Weight loss is the last domino, not the first", type: "Guide", min: "5 min read" },
+    // Module 2 — Follow the Plan
+    { cat: "Following the plan", title: "Why you have to do all of it — the body is one system", type: "Guide", min: "5 min read" },
+    { cat: "Nutrition", title: "You probably don't eat as well as you think", type: "Video", min: "6 min" },
+    { cat: "Sleep & energy", title: "Sleep and energy come first — here's how we get you there", type: "Guide", min: "4 min read" },
+    // Module 3 — meds overview + Module 7 — per-item
+    { cat: "Testosterone", title: "Testosterone for women — what it does, what it doesn't", type: "Video", min: "5 min" },
+    { cat: "Testosterone", title: "Testosterone for men — the real story", type: "Video", min: "5 min" },
+    { cat: "Thyroid", title: "Thyroid (NP Thyroid) — why your dose ramps weekly", type: "Guide", min: "5 min read" },
+    { cat: "Weight loss", title: "GLP-1s (Semaglutide / Tirzepatide) — what they do", type: "Video", min: "6 min" },
+    { cat: "Peptides", title: "Peptides & bioregulators — when they actually help", type: "Video", min: "7 min" },
+    { cat: "Peptides", title: "Sleep peptides — the next step when basics aren't enough", type: "Guide", min: "4 min read" },
+    { cat: "Supporting", title: "DHEA — the hormone behind your hormones", type: "Guide", min: "3 min read" },
+    { cat: "Supporting", title: "NAD+ — energy at the cellular level", type: "Guide", min: "3 min read" },
+    { cat: "Supporting", title: "Low Dose Naltrexone (LDN) — a tiny dose, big range", type: "Guide", min: "4 min read" },
+    // Module 8 — Reactions & troubleshooting (Emily's asks)
+    { cat: "Reactions", title: "Reaction to your peptide? Usually a normal histamine response", type: "Video", min: "4 min" },
+    { cat: "Reactions", title: "Common side effects — what's normal, what's not", type: "Guide", min: "5 min read" },
+    { cat: "Troubleshooting", title: "\"It's not working\" — troubleshoot before you quit", type: "Guide", min: "5 min read" },
+    // Labs
     { cat: "Labs", title: "How to read your panel (and what we watch)", type: "Guide", min: "8 min read" },
     { cat: "Storage", title: "Storing and traveling with your medications", type: "Guide", min: "3 min read" },
   ];
