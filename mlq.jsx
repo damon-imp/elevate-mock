@@ -41,18 +41,18 @@ const MLQ_DEMO={patient:{name:"John Doe",dob:"01/15/1985",id:"EH-JD001"},draws:[
 };
 
 const MLQ_PATIENTS=[
-  {id:"EH-JD001",name:"John Doe",dob:"01/15/1985",gender:"M",phone:"(503) 555-0147",email:"john.doe@email.com",lastDraw:"Mar 2026",draws:6,critFlags:3,warnFlags:4,status:"active",provider:"Dr. Sarah Chen",labsDue:false,planStatus:"signed",lastVisit:"Mar 15, 2026",tags:["TRT","Monthly"],program:"Monthly HRT",referral:"Google",joinDate:"Nov 2024"},
-  {id:"EH-SM002",name:"Sarah Mitchell",dob:"06/22/1978",gender:"F",phone:"(503) 555-0293",email:"sarah.m@email.com",lastDraw:"Mar 2026",draws:4,critFlags:0,warnFlags:2,status:"active",provider:"Dr. Sarah Chen",labsDue:true,planStatus:"draft",lastVisit:"Mar 20, 2026",tags:["HRT","Monthly"],program:"Monthly HRT",referral:"Referral - Dr. Adams",joinDate:"Jun 2025"},
-  {id:"EH-RJ003",name:"Robert James",dob:"11/03/1990",gender:"M",phone:"(971) 555-0384",email:"r.james@email.com",lastDraw:"Feb 2026",draws:3,critFlags:1,warnFlags:1,status:"active",provider:"Dr. James Ward",labsDue:true,planStatus:"signed",lastVisit:"Feb 10, 2026",tags:["TRT","GLP-1"],program:"Monthly HRT + GLP-1",referral:"Instagram",joinDate:"Sep 2025"},
-  {id:"EH-LW004",name:"Linda Watson",dob:"09/14/1972",gender:"F",phone:"(503) 555-0412",email:"linda.w@email.com",lastDraw:"Jan 2026",draws:5,critFlags:0,warnFlags:0,status:"active",provider:"Dr. James Ward",labsDue:true,planStatus:"signed",lastVisit:"Jan 25, 2026",tags:["HRT","Peptides"],program:"Monthly HRT",referral:"Referral - Patient",joinDate:"Mar 2024"},
-  {id:"EH-MC005",name:"Michael Chen",dob:"03/30/1988",gender:"M",phone:"(971) 555-0528",email:"m.chen@email.com",lastDraw:"Mar 2026",draws:2,critFlags:2,warnFlags:3,status:"active",provider:"Dr. Sarah Chen",labsDue:false,planStatus:"draft",lastVisit:"Mar 28, 2026",tags:["TRT"],program:"Monthly HRT",referral:"Google",joinDate:"Feb 2026"},
-  {id:"EH-AP006",name:"Angela Perez",dob:"12/05/1983",gender:"F",phone:"(503) 555-0637",email:"a.perez@email.com",lastDraw:"Dec 2025",draws:3,critFlags:0,warnFlags:1,status:"active",provider:"Dr. James Ward",labsDue:true,planStatus:"none",lastVisit:"Dec 18, 2025",tags:["HRT"],program:"Monthly HRT",referral:"Facebook",joinDate:"Aug 2025"},
-  {id:"EH-TK007",name:"Thomas Kim",dob:"07/19/1975",gender:"M",phone:"(503) 555-0741",email:"t.kim@email.com",lastDraw:"Mar 2026",draws:7,critFlags:0,warnFlags:0,status:"active",provider:"Dr. Sarah Chen",labsDue:false,planStatus:"signed",lastVisit:"Apr 1, 2026",tags:["TRT","Monthly","Peptides"],program:"Monthly HRT + Peptides",referral:"Referral - Patient",joinDate:"Jan 2024"},
-  {id:"EH-JB008",name:"Jennifer Brooks",dob:"04/11/1991",gender:"F",phone:"(971) 555-0856",email:"j.brooks@email.com",lastDraw:"Nov 2025",draws:2,critFlags:1,warnFlags:2,status:"inactive",provider:"Dr. James Ward",labsDue:true,planStatus:"none",lastVisit:"Nov 5, 2025",tags:["Cancelled"],program:"None",referral:"Google",joinDate:"Sep 2025"},
-  {id:"EH-DW009",name:"David Wilson",dob:"08/27/1969",gender:"M",phone:"(503) 555-0963",email:"d.wilson@email.com",lastDraw:"Feb 2026",draws:4,critFlags:1,warnFlags:3,status:"active",provider:"Dr. Sarah Chen",labsDue:true,planStatus:"draft",lastVisit:"Feb 22, 2026",tags:["TRT","Cash Pay Labs"],program:"Monthly HRT",referral:"Podcast",joinDate:"Jul 2025"},
-  {id:"EH-KR010",name:"Karen Rodriguez",dob:"01/08/1980",gender:"F",phone:"(971) 555-1074",email:"k.rod@email.com",lastDraw:"Mar 2026",draws:3,critFlags:0,warnFlags:1,status:"active",provider:"Dr. James Ward",labsDue:false,planStatus:"signed",lastVisit:"Mar 30, 2026",tags:["HRT","Monthly"],program:"Monthly HRT",referral:"Referral - Coach",joinDate:"Dec 2025"},
-  {id:"EH-BT011",name:"Brian Taylor",dob:"05/16/1986",gender:"M",phone:"(503) 555-1185",email:"b.taylor@email.com",lastDraw:"Jan 2026",draws:2,critFlags:0,warnFlags:2,status:"active",provider:"Dr. Sarah Chen",labsDue:true,planStatus:"none",lastVisit:"Jan 14, 2026",tags:["TRT","GLP-1","Cash Pay Labs"],program:"Monthly HRT + GLP-1",referral:"Instagram",joinDate:"Dec 2025"},
-  {id:"EH-NL012",name:"Nicole Lee",dob:"10/29/1994",gender:"F",phone:"(971) 555-1296",email:"n.lee@email.com",lastDraw:"Mar 2026",draws:4,critFlags:0,warnFlags:0,status:"active",provider:"Dr. James Ward",labsDue:false,planStatus:"signed",lastVisit:"Apr 5, 2026",tags:["HRT","Peptides","Monthly"],program:"Monthly HRT + Peptides",referral:"TikTok",joinDate:"Apr 2025"},
+  {id:"EH-JD001",name:"John Doe",dob:"01/15/1985",gender:"M",phone:"(503) 555-0147",email:"john.doe@email.com",lastDraw:"Mar 2026",draws:6,critFlags:3,warnFlags:4,status:"active",provider:"Jennifer Knapp, APRN",labsDue:false,planStatus:"signed",lastVisit:"Mar 15, 2026",tags:["Monthly Program"],program:"Monthly Program",referral:"Facebook",joinDate:"Nov 2024"},
+  {id:"EH-SM002",name:"Sarah Mitchell",dob:"06/22/1978",gender:"F",phone:"(503) 555-0293",email:"sarah.m@email.com",lastDraw:"Mar 2026",draws:4,critFlags:0,warnFlags:2,status:"active",provider:"Jennifer Knapp, APRN",labsDue:true,planStatus:"draft",lastVisit:"Mar 20, 2026",tags:["Monthly Program"],program:"Monthly Program",referral:"Referral - Tiffany",joinDate:"Jun 2025"},
+  {id:"EH-RJ003",name:"Robert James",dob:"11/03/1990",gender:"M",phone:"(971) 555-0384",email:"r.james@email.com",lastDraw:"Feb 2026",draws:3,critFlags:1,warnFlags:1,status:"active",provider:"Tara Bradstreet",labsDue:true,planStatus:"signed",lastVisit:"Feb 10, 2026",tags:["Monthly Program","GLP-1 Only"],program:"Monthly Program + GLP-1",referral:"Instagram",joinDate:"Sep 2025"},
+  {id:"EH-LW004",name:"Linda Watson",dob:"09/14/1972",gender:"F",phone:"(503) 555-0412",email:"linda.w@email.com",lastDraw:"Jan 2026",draws:5,critFlags:0,warnFlags:0,status:"active",provider:"Tara Bradstreet",labsDue:true,planStatus:"signed",lastVisit:"Jan 25, 2026",tags:["Monthly Program","Peptide Only"],program:"Monthly Program + Peptides",referral:"Referral - Patient",joinDate:"Mar 2024"},
+  {id:"EH-MC005",name:"Michael Chen",dob:"03/30/1988",gender:"M",phone:"(971) 555-0528",email:"m.chen@email.com",lastDraw:"Mar 2026",draws:2,critFlags:2,warnFlags:3,status:"active",provider:"Jennifer Knapp, APRN",labsDue:false,planStatus:"draft",lastVisit:"Mar 28, 2026",tags:["Monthly Program"],program:"Monthly Program",referral:"Facebook",joinDate:"Feb 2026"},
+  {id:"EH-AP006",name:"Angela Perez",dob:"12/05/1983",gender:"F",phone:"(503) 555-0637",email:"a.perez@email.com",lastDraw:"Dec 2025",draws:3,critFlags:0,warnFlags:1,status:"active",provider:"Tara Bradstreet",labsDue:true,planStatus:"none",lastVisit:"Dec 18, 2025",tags:["GLP-1 Only"],program:"GLP-1 Only",referral:"Facebook",joinDate:"Aug 2025"},
+  {id:"EH-TK007",name:"Thomas Kim",dob:"07/19/1975",gender:"M",phone:"(503) 555-0741",email:"t.kim@email.com",lastDraw:"Mar 2026",draws:7,critFlags:0,warnFlags:0,status:"active",provider:"Jennifer Knapp, APRN",labsDue:false,planStatus:"signed",lastVisit:"Apr 1, 2026",tags:["Monthly Program","Peptide Only"],program:"Monthly Program + Peptides",referral:"Referral - Patient",joinDate:"Jan 2024"},
+  {id:"EH-JB008",name:"Jennifer Brooks",dob:"04/11/1991",gender:"F",phone:"(971) 555-0856",email:"j.brooks@email.com",lastDraw:"Nov 2025",draws:2,critFlags:1,warnFlags:2,status:"inactive",provider:"Tara Bradstreet",labsDue:true,planStatus:"none",lastVisit:"Nov 5, 2025",tags:["Cancelled"],program:"None",referral:"Facebook",joinDate:"Sep 2025"},
+  {id:"EH-DW009",name:"David Wilson",dob:"08/27/1969",gender:"M",phone:"(503) 555-0963",email:"d.wilson@email.com",lastDraw:"Feb 2026",draws:4,critFlags:1,warnFlags:3,status:"active",provider:"Jennifer Knapp, APRN",labsDue:true,planStatus:"draft",lastVisit:"Feb 22, 2026",tags:["Monthly Program","Access Labs"],program:"Monthly Program",referral:"Referral - Friend",joinDate:"Jul 2025"},
+  {id:"EH-KR010",name:"Karen Rodriguez",dob:"01/08/1980",gender:"F",phone:"(971) 555-1074",email:"k.rod@email.com",lastDraw:"Mar 2026",draws:3,critFlags:0,warnFlags:1,status:"active",provider:"Tara Bradstreet",labsDue:false,planStatus:"signed",lastVisit:"Mar 30, 2026",tags:["Monthly Program"],program:"Monthly Program",referral:"Referral - Coach",joinDate:"Dec 2025"},
+  {id:"EH-BT011",name:"Brian Taylor",dob:"05/16/1986",gender:"M",phone:"(503) 555-1185",email:"b.taylor@email.com",lastDraw:"Jan 2026",draws:2,critFlags:0,warnFlags:2,status:"active",provider:"Jennifer Knapp, APRN",labsDue:true,planStatus:"none",lastVisit:"Jan 14, 2026",tags:["GLP-1 Only","Access Labs"],program:"GLP-1 Only",referral:"Instagram",joinDate:"Dec 2025"},
+  {id:"EH-NL012",name:"Nicole Lee",dob:"10/29/1994",gender:"F",phone:"(971) 555-1296",email:"n.lee@email.com",lastDraw:"Mar 2026",draws:4,critFlags:0,warnFlags:0,status:"active",provider:"Tara Bradstreet",labsDue:false,planStatus:"signed",lastVisit:"Apr 5, 2026",tags:["Peptide Only"],program:"Peptide Only",referral:"Instagram - OTF coaching",joinDate:"Apr 2025"},
 ];
 
 const MLQ_st=(v,m)=>{const d=MLQ_MD[m];if(!d||v==null)return"none";if(v<d.lo)return"low";if(v>d.hi)return"high";return"ok";};
@@ -262,11 +262,15 @@ function MLQProviderView() {
           <div style={{ fontSize: 20, fontWeight: 600, color: "var(--ink)" }}>{data.patient.name}</div>
           <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>DOB {data.patient.dob} · {data.patient.id} · <span style={{ color: "var(--ink)" }}>FL</span> · Monthly HRT</div>
         </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <button style={MLQ_ghostBtn}>Message</button>
-          <button style={MLQ_ghostBtn}>Order meds</button>
-          <button style={MLQ_primBtn}>Send notes</button>
+        <div style={{ display: "flex", gap: 7, flexWrap: "wrap", justifyContent: "flex-end", maxWidth: 420 }}>
+          {["Profile","Charting","eRx","Labs","Fullscript","Messages","Superbill","Video"].map((a,i) => (
+            <button key={a} style={i===1?MLQ_primBtn:MLQ_ghostBtn}>{a}</button>
+          ))}
         </div>
+      </div>
+      {/* the anti-pattern fix, stated */}
+      <div style={{ fontSize: 12, color: "var(--ink-soft)", background: "var(--blue-tint)", borderRadius: 10, padding: "9px 14px", lineHeight: 1.5 }}>
+        The 8 actions this team actually uses, surfaced on the record. Replaces OptiMantra's 29-action modal + 18-item dropdown - no clicking in and out. Dropped the long tail (Form 1500, implantable devices, growth chart, inventory) - irrelevant to cash-pay HRT telehealth.
       </div>
 
       {/* quick flag counts + last comms, on the view */}
@@ -297,8 +301,48 @@ function MLQProviderView() {
       </div>
 
       {sub === "overview" && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ink)" }}>Active flags & recommendations</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          {/* OptiMantra's dashboard cards, mapped into one clean view */}
+          <div className="lab-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+            {[
+              { t: "Clinical Profile", rows: [["Blood group","O+"],["Smoking","No"],["Dietary","Organic"],["History","ADHD (self)"]] },
+              { t: "Diagnoses", rows: [["Hypogonadism","E29.1"],["Fatigue","R53.83"]] },
+              { t: "Health Maintenance", rows: [["Testosterone","q3-4mo"],["Thyroid panel","q6mo"],["Lipids","q6mo"]] },
+            ].map((c,i) => (
+              <div key={i} style={{ padding: 16, background: "var(--bg-2)", borderRadius: 14, border: "1px solid var(--rule)" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 10 }}>{c.t}</div>
+                {c.rows.map(([k,v],j) => (
+                  <div key={j} style={{ display: "flex", justifyContent: "space-between", fontSize: 13, padding: "4px 0" }}>
+                    <span style={{ color: "var(--ink-soft)" }}>{k}</span><span style={{ color: "var(--ink)", fontWeight: 500 }}>{v}</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* Labs under watch — pulled from the lab engine */}
+          <div style={{ border: "1px solid var(--rule)", borderRadius: 14, overflow: "hidden" }}>
+            <div style={{ padding: "12px 16px", background: "var(--bg-2)", fontSize: 12, fontWeight: 700, color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.04em" }}>Lab Results Under Watch</div>
+            {[["Hematocrit","56.1%","Mar 2026","high"],["LDL","167 mg/dL","Mar 2026","high"],["Free Testosterone","11.9 pg/mL","Mar 2026","low"]].map(([m,v,d,st],i) => (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr auto", gap: 10, padding: "11px 16px", borderTop: "1px solid var(--rule)", fontSize: 13, alignItems: "center" }}>
+                <span style={{ fontWeight: 500 }}>{m}</span><span style={{ fontFamily: "var(--mono)" }}>{v}</span><span style={{ color: "var(--ink-mute)" }}>{d}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: st==="high"?"var(--red,#E5484D)":"var(--amber,#B7791F)", background: st==="high"?"#FDECEC":"#FCF3E6", padding: "2px 8px", borderRadius: 6, textTransform: "uppercase" }}>{st}</span>
+              </div>
+            ))}
+          </div>
+          {/* Open tasks/orders */}
+          <div style={{ border: "1px solid var(--rule)", borderRadius: 14, overflow: "hidden" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", background: "var(--bg-2)" }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.04em" }}>Open Tasks / Orders</span>
+              <button style={{ ...MLQ_ghostBtn, padding: "5px 12px", fontSize: 12 }}>+ New</button>
+            </div>
+            {[["Lab order follow-up","Due Jun 8","high"],["Plan of care - send to patient","Due Jun 6","normal"]].map(([t,d,p],i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "11px 16px", borderTop: "1px solid var(--rule)", fontSize: 13 }}>
+                <span style={{ fontWeight: 500 }}>{t}</span>
+                <span style={{ color: p==="high"?"var(--red,#E5484D)":"var(--ink-soft)" }}>{d}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ink)", marginTop: 4 }}>Active flags & recommendations</div>
           <MLQFlags flags={flags} />
         </div>
       )}
@@ -328,6 +372,19 @@ function MLQProviderView() {
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <div style={{ fontSize: 13.5, color: "var(--ink)" }}><span style={{ fontWeight: 600 }}>Estradiol cream</span> - patient reported <span style={{ fontFamily: "var(--mono)" }}>0.5 mL twice daily</span> on Jun 3 (was 0.25 mL). Self-adjusted for symptom relief.</div>
               <div style={{ fontSize: 12.5, color: "var(--ink-soft)" }}>Titrating meds update here the moment the patient reports them - no waiting for a callback. Captured into the chart and the next review.</div>
+            </div>
+          </div>
+          {/* Fullscript embed + cash-pay lab ordering - both native in OptiMantra today, rebuilt in-portal */}
+          <div className="lab-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 4 }}>
+            <div style={{ padding: 16, background: "var(--bg-2)", borderRadius: 14, border: "1px solid var(--rule)" }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>Fullscript</div>
+              <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5, marginBottom: 12 }}>Recommend supplements, patient checks out in-portal. Auto-refill offered (patient opt-in, not forced).</div>
+              <button style={MLQ_primBtn}>Build recommendation</button>
+            </div>
+            <div style={{ padding: 16, background: "var(--bg-2)", borderRadius: 14, border: "1px solid var(--rule)" }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "var(--blue)", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>Order labs (cash-pay)</div>
+              <div style={{ fontSize: 13, color: "var(--ink-soft)", lineHeight: 1.5, marginBottom: 12 }}>Quote -> patient approves in-portal -> charged -> slip auto-sent. No manual back-and-forth.</div>
+              <button style={MLQ_ghostBtn}>Send lab quote</button>
             </div>
           </div>
         </div>
@@ -365,12 +422,15 @@ function MLQAdminView() {
   const pts = MLQ_PATIENTS;
   const [q, setQ] = React.useState("");
   const [status, setStatus] = React.useState("all");
+  const [seg, setSeg] = React.useState("all"); // real Elevate segmentation
+  const SEGMENTS = ["all","Monthly Program","GLP-1 Only","Peptide Only","Access Labs"];
   const total = pts.length;
   const active = pts.filter(p => p.status === "active").length;
   const critFlags = pts.reduce((s, p) => s + (p.critFlags || 0), 0);
   const labsDue = pts.filter(p => p.labsDue).length;
   const filtered = pts.filter(p => {
     if (status !== "all" && p.status !== status) return false;
+    if (seg !== "all" && !(p.tags || []).includes(seg)) return false;
     if (q && !(`${p.name} ${p.email} ${p.phone}`.toLowerCase().includes(q.toLowerCase()))) return false;
     return true;
   });
@@ -400,9 +460,20 @@ function MLQAdminView() {
           }}>{s}</button>
         ))}
       </div>
+      {/* real Elevate program segmentation filter */}
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+        <span style={{ fontSize: 12, fontWeight: 600, color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.04em" }}>Program</span>
+        {SEGMENTS.map(sg => (
+          <button key={sg} onClick={() => setSeg(sg)} style={{
+            appearance: "none", cursor: "pointer", padding: "7px 14px", borderRadius: 980, fontFamily: "var(--sans)", fontSize: 12.5, fontWeight: 500,
+            border: seg === sg ? "1px solid var(--blue)" : "1px solid var(--rule)",
+            background: seg === sg ? "var(--blue-tint)" : "var(--bg)", color: seg === sg ? "var(--blue)" : "var(--ink-soft)", textTransform: sg==="all"?"capitalize":"none",
+          }}>{sg}</button>
+        ))}
+      </div>
       <div style={{ border: "1px solid var(--rule)", borderRadius: 14, overflow: "hidden" }}>
         <div className="mlq-roster-head" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 0.8fr 0.8fr", gap: 12, padding: "12px 18px", background: "var(--bg-2)", fontSize: 11, fontWeight: 600, color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
-          <div>Patient</div><div>Provider</div><div>Program</div><div>Flags</div><div>Status</div>
+          <div>Patient</div><div>Provider</div><div>Program / Tags</div><div>Labs</div><div>Status</div>
         </div>
         {filtered.map((p, i) => (
           <div key={p.id} className="mlq-roster-row" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 0.8fr 0.8fr", gap: 12, padding: "14px 18px", borderTop: "1px solid var(--rule)", alignItems: "center", fontSize: 13.5 }}>
@@ -411,10 +482,15 @@ function MLQAdminView() {
               <div style={{ fontSize: 11.5, color: "var(--ink-mute)", fontFamily: "var(--mono)" }}>{p.id} · {p.gender}</div>
             </div>
             <div style={{ color: "var(--ink-soft)" }}>{p.provider}</div>
-            <div style={{ color: "var(--ink-soft)" }}>{p.program}</div>
+            <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+              {(p.tags||[]).map(t => (
+                <span key={t} style={{ fontSize: 10.5, fontWeight: 600, color: t==="Cancelled"?"var(--ink-mute)":"var(--blue)", background: t==="Cancelled"?"var(--bg-2)":"var(--blue-tint)", padding: "2px 8px", borderRadius: 6, whiteSpace: "nowrap" }}>{t}</span>
+              ))}
+            </div>
             <div>
-              {p.critFlags ? <span style={{ fontSize: 11, fontWeight: 700, color: "var(--red,#E5484D)", background: "#FDECEC", padding: "2px 8px", borderRadius: 6 }}>{p.critFlags}</span>
-                : <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>—</span>}
+              {p.labsDue
+                ? <button style={{ appearance:"none", cursor:"pointer", fontSize: 11, fontWeight: 700, color: "var(--amber,#B7791F)", background: "#FCF3E6", border:"1px solid #F0D9A8", padding: "3px 9px", borderRadius: 6 }}>Overdue · Remind</button>
+                : <span style={{ fontSize: 12, color: "var(--mint-2)" }}>Current</span>}
             </div>
             <div>
               <span style={{ fontSize: 11, fontWeight: 600, textTransform: "capitalize", color: p.status === "active" ? "var(--mint-2)" : "var(--ink-mute)", background: p.status === "active" ? "var(--mint-tint)" : "var(--bg-2)", padding: "3px 9px", borderRadius: 6 }}>{p.status}</span>
