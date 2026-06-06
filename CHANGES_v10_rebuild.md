@@ -40,3 +40,13 @@ implemented INTO the provider and admin views, not just written up in the spec.
 ## VALIDATION
 All JSX babel-parsed clean (mlq.jsx, page-portal.jsx, data.jsx). Provider + admin + patient
 views all demoable. Review with Emily + team -> v11.
+
+## ADDED (v10.1 — flagged call requirements that were missing)
+8. **Provider notes section** (charting tab): expandable, full-width encounter-note editor
+   (Follow-up / Initial consult / Basic note types) with Save draft + Sign & lock, a
+   "Generate from visit" AI hook, and a team-visible prior-notes thread with authorship
+   (Jennifer Knapp APRN, Tara Bradstreet). Replaces OptiMantra's tiny notes box — explicit call ask.
+9. **Practice-wide audit log** (admin view): HIPAA "log everything, every action" trail —
+   When / User / Action / Record, covering record access, eRx, messages/email/text/fax, edits,
+   note sign-locks, logins. Filterable by action type, exportable, immutable. Explicit call ask
+   + HIPAA requirement. (MedLabIQ has audit; OptiMantra's Timeline was the analog — now built in.)

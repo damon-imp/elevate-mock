@@ -348,6 +348,42 @@ function MLQProviderView() {
       )}
       {sub === "charting" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {/* PROVIDER NOTES — expandable encounter note + team-visible thread (call ask: replace OptiMantra's tiny box) */}
+          <div style={{ border: "1px solid var(--rule)", borderRadius: 14, padding: 18, background: "var(--bg)" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <div style={{ fontSize: 15, fontWeight: 600 }}>Provider notes</div>
+              <div style={{ display: "flex", gap: 7 }}>
+                <button style={{ ...MLQ_ghostBtn, padding: "6px 13px", fontSize: 12.5 }}>Generate from visit</button>
+                <select style={{ appearance: "none", border: "1px solid var(--rule)", background: "var(--bg)", color: "var(--ink-soft)", fontFamily: "var(--sans)", fontSize: 12.5, padding: "6px 12px", borderRadius: 980, cursor: "pointer" }}>
+                  <option>Follow-up note</option><option>Initial consult</option><option>Basic note</option>
+                </select>
+              </div>
+            </div>
+            <textarea defaultValue={"Patient reports improved energy and sleep since last visit. Tolerating protocol well, no adverse effects. Hematocrit remains elevated (56.1%) - discussed hydration and therapeutic phlebotomy if it climbs further. ALT trending up, will recheck at next draw. Continue current regimen, re-draw on cadence."}
+              style={{ width: "100%", minHeight: 120, resize: "vertical", padding: 14, borderRadius: 12, border: "1px solid var(--rule)", fontFamily: "var(--sans)", fontSize: 14, lineHeight: 1.55, color: "var(--ink)", background: "var(--bg-2)", boxSizing: "border-box" }} />
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 10 }}>
+              <span style={{ fontSize: 12, color: "var(--ink-mute)" }}>Expandable. Full width. Team-visible. Not OptiMantra's tiny box.</span>
+              <div style={{ display: "flex", gap: 7 }}>
+                <button style={{ ...MLQ_ghostBtn, padding: "7px 14px", fontSize: 12.5 }}>Save draft</button>
+                <button style={{ ...MLQ_primBtn, padding: "7px 14px", fontSize: 12.5 }}>Sign &amp; lock</button>
+              </div>
+            </div>
+            {/* prior notes thread — team-visible authorship */}
+            <div style={{ marginTop: 16, borderTop: "1px solid var(--rule)", paddingTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                { who: "Jennifer Knapp, APRN", when: "Apr 1, 2026 · Follow-up", body: "Adjusted thyroid to NP 120mg. Energy improving. Labs ordered q3mo." },
+                { who: "Tara Bradstreet", when: "Feb 10, 2026 · Follow-up", body: "Lipid panel reviewed - trigs corrected. Continue. Patient education on diet sent." },
+              ].map((n, i) => (
+                <div key={i} style={{ display: "flex", gap: 12 }}>
+                  <div style={{ width: 34, height: 34, flexShrink: 0, borderRadius: "50%", background: "var(--blue-tint)", color: "var(--blue)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 12 }}>{n.who.split(" ").map(w=>w[0]).slice(0,2).join("")}</div>
+                  <div>
+                    <div style={{ fontSize: 12.5 }}><span style={{ fontWeight: 600 }}>{n.who}</span> <span style={{ color: "var(--ink-mute)" }}>· {n.when}</span></div>
+                    <div style={{ fontSize: 13.5, color: "var(--ink-soft)", marginTop: 2, lineHeight: 1.5 }}>{n.body}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
           <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>Every marker, trended across {data.draws.length} draws. Click to expand. Notes-to-patient sent inline — no click-out.</div>
           {Object.entries(cats).map(([cat, ms]) => (
             <div key={cat}>
@@ -497,6 +533,42 @@ function MLQAdminView() {
             </div>
           </div>
         ))}
+      </div>
+      {/* PRACTICE-WIDE AUDIT LOG — HIPAA: log everything, every action (call ask) */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
+        <div>
+          <div style={{ fontSize: 15, fontWeight: 600 }}>Audit log</div>
+          <div style={{ fontSize: 12.5, color: "var(--ink-soft)", marginTop: 2 }}>Every action, practice-wide. Who did what, to which record, when. Immutable. HIPAA access trail.</div>
+        </div>
+        <div style={{ display: "flex", gap: 7 }}>
+          <select style={{ appearance: "none", border: "1px solid var(--rule)", background: "var(--bg)", color: "var(--ink-soft)", fontFamily: "var(--sans)", fontSize: 12.5, padding: "7px 12px", borderRadius: 980, cursor: "pointer" }}>
+            <option>All actions</option><option>Record access</option><option>Edits</option><option>Messages / email / text / fax</option><option>Prescriptions</option><option>Logins</option>
+          </select>
+          <button style={{ ...MLQ_ghostBtn, padding: "7px 14px", fontSize: 12.5 }}>Export</button>
+        </div>
+      </div>
+      <div style={{ border: "1px solid var(--rule)", borderRadius: 14, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1.4fr 0.9fr", gap: 12, padding: "12px 18px", background: "var(--bg-2)", fontSize: 11, fontWeight: 600, color: "var(--ink-mute)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+          <div>When</div><div>User</div><div>Action</div><div>Record</div>
+        </div>
+        {[
+          { when: "Jun 5 · 2:14 PM", user: "Jennifer Knapp, APRN", action: "Viewed patient chart", rec: "EH-JD001", t: "access" },
+          { when: "Jun 5 · 2:11 PM", user: "Tara Bradstreet", action: "Sent eRx — Testosterone cypionate", rec: "EH-RJ003", t: "rx" },
+          { when: "Jun 5 · 1:58 PM", user: "Admin (front desk)", action: "Sent appointment reminder (email)", rec: "EH-SM002", t: "msg" },
+          { when: "Jun 5 · 1:42 PM", user: "Jennifer Knapp, APRN", action: "Signed & locked encounter note", rec: "EH-MC005", t: "edit" },
+          { when: "Jun 5 · 1:30 PM", user: "Tara Bradstreet", action: "Edited Plan of Care", rec: "EH-DW009", t: "edit" },
+          { when: "Jun 5 · 9:02 AM", user: "Emily Murphy", action: "Logged in", rec: "—", t: "login" },
+        ].map((e, i) => {
+          const col = { access: "var(--blue)", rx: "var(--mint-2)", msg: "var(--ink-soft)", edit: "var(--amber,#B7791F)", login: "var(--ink-mute)" }[e.t];
+          return (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1.4fr 0.9fr", gap: 12, padding: "11px 18px", borderTop: "1px solid var(--rule)", fontSize: 13, alignItems: "center" }}>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-mute)" }}>{e.when}</span>
+              <span style={{ color: "var(--ink)" }}>{e.user}</span>
+              <span style={{ color: col, fontWeight: 500 }}>{e.action}</span>
+              <span style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-soft)" }}>{e.rec}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
