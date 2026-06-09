@@ -459,6 +459,7 @@ function MLQAdminView() {
   const [q, setQ] = React.useState("");
   const [status, setStatus] = React.useState("all");
   const [seg, setSeg] = React.useState("all"); // real Elevate segmentation
+  const [adminTab, setAdminTab] = React.useState("patients"); // patients | financials
   const SEGMENTS = ["all","Monthly Program","GLP-1 Only","Peptide Only","Access Labs"];
   const total = pts.length;
   const active = pts.filter(p => p.status === "active").length;
@@ -470,8 +471,35 @@ function MLQAdminView() {
     if (q && !(`${p.name} ${p.email} ${p.phone}`.toLowerCase().includes(q.toLowerCase()))) return false;
     return true;
   });
+
+  const ADMIN_TABS = [
+    { id: "patients", label: "Patients" },
+    { id: "financials", label: "Financials" },
+  ];
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+      {/* Admin sub-tab strip */}
+      <div style={{ display: "flex", gap: 4, borderBottom: "1px solid var(--rule)", marginBottom: 4 }}>
+        {ADMIN_TABS.map(tb => {
+          const on = adminTab === tb.id;
+          return (
+            <button key={tb.id} onClick={() => setAdminTab(tb.id)} style={{
+              appearance: "none", background: "transparent", border: "none",
+              padding: "10px 18px", fontSize: 14, fontWeight: 500,
+              color: on ? "var(--blue)" : "var(--ink-soft)",
+              borderBottom: on ? "2px solid var(--blue)" : "2px solid transparent",
+              cursor: "pointer", marginBottom: -1, fontFamily: "var(--sans)", whiteSpace: "nowrap",
+            }}>{tb.label}</button>
+          );
+        })}
+      </div>
+
+      {adminTab === "financials" && <MLQFinancials />}
+
+      {adminTab === "patients" && (
+      <React.Fragment>
       <div className="lab-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
         {[
           { n: total, l: "Total patients" },
@@ -570,6 +598,8 @@ function MLQAdminView() {
           );
         })}
       </div>
+      </React.Fragment>
+      )}
     </div>
   );
 }
